@@ -18,3 +18,9 @@ jobs:
 
       - name: Simulate Test
         run: echo "Testing complete. Bugs may still exist."
+      - name: Notify Slack
+        if: always()
+        run: |
+          curl -X POST -H 'Content-type: application/json' \
+          --data '{"text":"BugBuster build completed successfully 🚀"}' \
+          ${{ secrets.SLACK_WEBHOOK }}
